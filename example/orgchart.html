@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>组织结构图示例</title>
+	<link type="text/css" rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css"/>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="../src/raphael.orgbox.js"></script>
+	<script src="../src/jquery.widgets.orgchart.js"></script>
+	</head>
+	<body>
+		<h2>组织结构图</h2>
+		<div id="chart" style="width: 960px; height: 600px;margin: 0 auto;">
+		</div>
+	<script type="text/javascript">
+$(function(exports) {
+	var _colors = {
+			blue : "#4169E1",
+			green : "#008000",
+			brown : "#A52A2A",
+			lightgreen : "#90EE90",
+			chocolate : "#D2691E",
+			sienna : "#A0522D",
+			peru : "#CD853F",
+			orange : "#FFA500"
+	};
+	var _datas = [{
+		id : "100001",
+		name : "耗能总量(100%)",
+		value : "1800.00tce",
+		color : _colors["blue"],
+		pid : null
+	}, {
+		id : "100002",
+		name : "总耗水量(10%)",
+		value : "5400.00t",
+		color : _colors["green"],
+		pid : "100001"
+	}, {
+		id : "100003",
+		name : "总耗电量(60%)",
+		value : "4200.00kWh",
+		color : _colors["brown"],
+		pid : "100001"
+	}, {
+		id : "100004",
+		name : "总耗气量(30%)",
+		value : "1230.00m3",
+		color : _colors["lightgreen"],
+		pid : "100001"
+	}, {
+		id : "100005",
+		name : "照明插座用电(15%)",
+		value : "1050.00kWh",
+		color : _colors["chocolate"],
+		pid : "100003"
+	}, {
+		id : "100006",
+		name : "空调用电(15%)",
+		value : "1050.00kWh",
+		color : _colors["sienna"],
+		pid : "100003"
+	}, {
+		id : "100007",
+		name : "动力用电(15%)",
+		value : "1050.00kWh",
+		color : _colors["peru"],
+		pid : "100003"
+	}, {
+		id : "100008",
+		name : "特殊用电(15%)",
+		value : "1050.00kWh",
+		color : _colors["orange"],
+		pid : "100003"
+	}, {
+		id : "100009",
+		name : "照明与插座(5%)",
+		value : "1800.00tce",
+		pid : "100005"
+	}, {
+		id : "100010",
+		name : "走廊与应急(100%)",
+		value : "1800.00tce",
+		pid : "100005"
+	}, {
+		id : "100011",
+		name : "室外景观照明(100%)",
+		value : "1800.00tce",
+		pid : "100005"
+	}, {
+		id : "100012",
+		name : "冷热站(10%)",
+		value : "1800.00tce",
+		pid : "100006"
+	}, {
+		id : "100013",
+		name : "空调末端(5%)",
+		value : "1800.00tce",
+		pid : "100006"
+	}, {
+		id : "100014",
+		name : "电梯(100%)",
+		value : "1800.00tce",
+		pid : "100007"
+	}, {
+		id : "100015",
+		name : "水泵(100%)",
+		value : "1800.00tce",
+		pid : "100007"
+	}, {
+		id : "100016",
+		name : "通风机(100%)",
+		value : "1800.00tce",
+		pid : "100007"
+	}, {
+		id : "100017",
+		name : "信息中心(100%)",
+		value : "1800.00tce",
+		pid : "100008"
+	}, {
+		id : "100018",
+		name : "洗衣房(100%)",
+		value : "1800.00tce",
+		pid : "100008"
+	}, {
+		id : "100019",
+		name : "厨房餐厅(100%)",
+		value : "1800.00tce",
+		pid : "100008"
+	}, {
+		id : "100020",
+		name : "游泳池(100%)",
+		value : "1800.00tce",
+		pid : "100008"
+	}, {
+		id : "100021",
+		name : "健身房(100%)",
+		value : "1800.00tce",
+		pid : "100008"
+	}, {
+		id : "100022",
+		name : "其他(100%)",
+		value : "1800.00tce",
+		pid : "100008"
+	}, {
+		id : "100023",
+		name : "冷冻泵(100%)",
+		value : "1800.00tce",
+		pid : "100012"
+	}, {
+		id : "100024",
+		name : "冷却泵(100%)",
+		value : "1800.00tce",
+		pid : "100012"
+	}, {
+		id : "100025",
+		name : "冷风机组(100%)",
+		value : "1800.00tce",
+		pid : "100012"
+	}, {
+		id : "100026",
+		name : "冷却塔(100%)",
+		value : "1800.00tce",
+		pid : "100012"
+	}, {
+		id : "100027",
+		name : "热水循环泵(100%)",
+		value : "1800.00tce",
+		pid : "100012"
+	}, {
+		id : "100028",
+		name : "电锅炉(100%)",
+		value : "1800.00tce",
+		pid : "100012"
+	}, {
+		id : "100024",
+		name : "冷却泵1(100%)",
+		value : "1800.00tce",
+		pid : "100013"
+	}, {
+		id : "100025",
+		name : "冷风机组1(100%)",
+		value : "1800.00tce",
+		pid : "100013"
+	}, {
+		id : "100026",
+		name : "冷却塔1(100%)",
+		value : "1800.00tce",
+		pid : "100013"
+	}, {
+		id : "100027",
+		name : "热水循环泵1(100%)",
+		value : "1800.00tce",
+		pid : "100013"
+	}, {
+		id : "100028",
+		name : "电锅炉1(100%)",
+		value : "1800.00tce",
+		pid : "100013"
+	}];
+	
+	
+	var $chart = $("#chart");
+	$chart.orgchart({
+		width : 960,
+		height : 600,
+		nodeclick : function(evt, info, node) {
+			console.log(info);
+		}
+	});
+	
+	$chart.orgchart("draw", _datas);
+});
+	</script>
+	</body>
+</html>

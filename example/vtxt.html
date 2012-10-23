@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Show Me The Code</title>
+	<link type="text/css" rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css"/>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="../src/raphael.orgbox.js"></script>
+	</head>
+	<body>
+		<h2>组织结构图</h2>
+		<div id="chart" style="width: 960px; height: 480px;margin: 0 auto;">
+		</div>
+		<div id="attrs">
+		
+		</div>
+	
+	<script type="text/javascript">
+	var _log =  function(obj) {
+			var re = [];
+			if(typeof obj === "object") {
+				for(var k in obj) {
+					re.push(k);
+				}
+			} else {
+				re.push(obj);
+			}
+			$("#attrs").html(re.join("<br/>"));
+		}
+	window.console = window.console || {
+		log : _log
+	};
+var paper = Raphael("chart", 960, 480);
+var txt = paper.text(50, 50, "室内照明(2012%)");
+var txt2 = paper.vtext({
+	x:100, 
+	y:100, 
+	text:"室内照明(2012%)",
+	color : "#0000FF"
+});
+var bx = paper.twinBox({
+	cx : 200,
+	cy : 200,
+	text1 : "室内灯光照明(12%)",
+	text2 : "5234.42千瓦时",
+	fz : 12,
+	color : "#0000FF",
+	vertical : false
+});
+
+var bx = paper.twinBox({
+	cx : 400,
+	cy : 200,
+	text1 : "室内灯光照明(12%)",
+	text2 : "5234.42千瓦时",
+	fz : 12,
+	color : "#005544",
+	vertical : true
+});
+var bx = paper.singleBox({
+	cx : 600,
+	cy : 200,
+	text : "室内灯光照明(12%)",
+	fz : 12,
+	color : "#005544",
+	vertical : true
+});
+	</script>
+	</body>
+</html>
