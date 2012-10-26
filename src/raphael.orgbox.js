@@ -118,7 +118,7 @@
 	Raphael.fn.unirect = function(options) {
 		var ops = $.extend({}, Raphael.fn.unirect.defaults, options || {});
 		var re = this.rect(ops.x, ops.y, ops.width, ops.height, ops.r);
-		re.attr({fill : ops.color});
+		re.attr({fill : ops.color, "stroke-width" : 0.5});
 		return re;
 	};
 	

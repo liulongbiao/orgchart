@@ -118,7 +118,7 @@
 	Raphael.fn.unirect = function(options) {
 		var ops = $.extend({}, Raphael.fn.unirect.defaults, options || {});
 		var re = this.rect(ops.x, ops.y, ops.width, ops.height, ops.r);
-		re.attr({fill : ops.color});
+		re.attr({fill : ops.color, "stroke-width" : 0.5});
 		return re;
 	};
 	
@@ -624,7 +624,7 @@
 		
 		_drawLine : function(p1, p2) {
 			var line = "M" + p1.x + "," + p1.y + "L" + p2.x + "," + p2.y + "Z";
-			this._paper.path(line);
+			this._paper.path(line).attr({"stroke-width" : 0.2});
 		},
 		
 		clear : function() {

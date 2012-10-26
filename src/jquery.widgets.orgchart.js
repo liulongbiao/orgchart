@@ -359,7 +359,7 @@
 		
 		_drawLine : function(p1, p2) {
 			var line = "M" + p1.x + "," + p1.y + "L" + p2.x + "," + p2.y + "Z";
-			this._paper.path(line);
+			this._paper.path(line).attr({"stroke-width" : 0.2});
 		},
 		
 		clear : function() {
