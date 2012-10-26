@@ -78,6 +78,7 @@
 			pIdKey : "pid",
 			nameKey : "name",
 			valKey : "value",
+			maxFz : 14,
 			minHgap : 2,
 			minVgap : 4,
 			width : 960,
@@ -269,7 +270,7 @@
 			var minVfz = (height - ops.minVgap * rows) / mustVems;
 			var mustHems = root._hem_box, columns = root._colSpan;
 			var minHfz = (width - ops.minHgap * columns) / mustHems;
-			var fz = _min(minVfz, minHfz);
+			var fz = _min(minVfz, minHfz, ops.maxFz);
 			slf._fz = fz;
 			
 			var vgap = slf._vgap = (height - mustVems * fz) / rows;
