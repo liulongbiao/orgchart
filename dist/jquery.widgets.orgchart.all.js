@@ -295,6 +295,14 @@
 		return sum;
 	}
 	
+	function _randomHex2() {
+		var result = (Math.floor(0xFF * Math.random())).toString(16);
+		if(result.length === 1) {
+			result = "0" + result;
+		}
+		return result;
+	}
+	
 	function OrgNode(info, children) {
 		this.info = info;
 		this.children = (children && children.length) ? children : [];
@@ -341,8 +349,6 @@
 		options : {
 			idKey : "id",
 			pIdKey : "pid",
-			nameKey : "name",
-			valKey : "value",
 			maxFz : 14,
 			minHgap : 2,
 			minVgap : 4,
@@ -356,8 +362,8 @@
 			},
 			wordem : function(info) {
 				var slf = this, ops = slf.options;
-				var nmEm = slf._countEm(info[ops.nameKey]);
-				var valEm = slf._countEm(info[ops.valKey]);
+				var nmEm = slf._countEm(info.name);
+				var valEm = slf._countEm(info.value);
 				return _max(nmEm, valEm) + 1;
 			},
 			paintNode : function(info, level, cbox, node, pnode) {
@@ -374,8 +380,8 @@
 				var cell = slf._paper.twinBox({
 					cx : center.x,
 					cy : center.y,
-					text1 : info[ops.nameKey],
-					text2 : info[ops.valKey],
+					text1 : info.name,
+					text2 : info.value,
 					fz : slf._fz,
 					color : color,
 					vertical : vert
@@ -404,7 +410,7 @@
 		draw : function(datas, rootid) {
 			var slf = this;
 			slf.clear();
-			var root =slf. _buildTree(datas, rootid);
+			var root = slf._buildTree(datas, rootid);
 			if(!root) {
 				slf._drawEmpty();
 				return false;
@@ -654,7 +660,7 @@
 		},
 		
 		_randomColor : function() {
-			return "#"+("000"+(Math.random()*(1<<24)|0).toString(16)).substr(-6);
+			return "#" + _randomHex2() + _randomHex2() + _randomHex2();
 		},
 		
 		destory : function() {
