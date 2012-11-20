@@ -274,7 +274,7 @@
  * @author LiuLongbiao
  * @email liulongbiao@gmail.com
  */
-;(function($, Raphael, Math, undefined){
+;(function($, Raphael, Math, String, undefined){
 	
 	var _max = Math.max, _min = Math.min, _floor = Math.floor;
 	
@@ -362,8 +362,8 @@
 			},
 			wordem : function(info) {
 				var slf = this, ops = slf.options;
-				var nmEm = slf._countEm(info.name);
-				var valEm = slf._countEm(info.value);
+				var nmEm = slf._countEm(String(info.name));
+				var valEm = slf._countEm(String(info.value));
 				return _max(nmEm, valEm) + 1;
 			},
 			paintNode : function(info, level, cbox, node, pnode) {
@@ -380,8 +380,8 @@
 				var cell = slf._paper.twinBox({
 					cx : center.x,
 					cy : center.y,
-					text1 : info.name,
-					text2 : info.value,
+					text1 : String(info.name),
+					text2 : String(info.value),
 					fz : slf._fz,
 					color : color,
 					vertical : vert
@@ -603,6 +603,7 @@
 		_draw : function(node, parent) {
 			var slf = this;
 			var bbox = node._bbox, cbox = node._cbox, children = node.children, clen = children.length;
+			console.log(node);
 			if(!node.isRoot()) {
 				slf._drawLine(bbox.center("top"), cbox.center("top"));
 			}
@@ -670,4 +671,4 @@
 		}
 	});
 	
-})(jQuery, Raphael, Math);
+})(jQuery, Raphael, Math, String);

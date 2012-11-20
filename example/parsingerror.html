@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>组织结构图示例</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="../js/main/raphael.orgbox.js"></script>
+	<script src="../js/main/jquery.widgets.orgchart.js"></script>
+	</head>
+	<body>
+		<h2>组织结构图</h2>
+		<div id="chart" style="width: 960px; height: 600px;margin: 0 auto;">
+		</div>
+	<script type="text/javascript">
+$(function(exports) {
+	var _datas = [{"id":1,"name":"xxx能源公司","value":1,"pid":null},
+	              {"id":2,"name":"化工厂","value":2,"pid":1},
+	              {"id":3,"name":"电厂","value":3,"pid":1},
+	              {"id":4,"name":"化工厂工序1","value":4,"pid":2},
+	              {"id":6,"name":"电厂产线1","value":6,"pid":3},
+	              {"id":7,"name":"电厂产线2","value":7,"pid":3},
+	              {"id":8,"name":"电厂产线3","value":8,"pid":3},
+	              {"id":9,"name":"化工厂设备1","value":9,"pid":4},
+	              {"id":10,"name":"化工厂设备2","value":10,"pid":4},
+	              {"id":26,"name":"222","value":26,"pid":26},
+	              {"id":28,"name":"电厂","value":28,"pid":6},
+	              {"id":29,"name":"电厂产线3","value":29,"pid":28},
+	              {"id":37,"name":"teat1","value":37,"pid":1},
+	              {"id":45,"name":"dfew","value":45,"pid":37},
+	              {"id":49,"name":"dgeg","value":49,"pid":45}];
+	
+	var $chart = $("#chart");
+	$chart.orgchart({
+		width : 960,
+		height : 600,
+		nodeclick : function(evt, info, node) {
+			console.log(info);
+		}
+	});
+	$chart.orgchart("draw", _datas);
+	
+});
+	</script>
+	</body>
+</html>
