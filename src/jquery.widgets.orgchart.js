@@ -97,8 +97,8 @@
 			},
 			wordem : function(info) {
 				var slf = this, ops = slf.options;
-				var nmEm = slf._countEm(String(info.name));
-				var valEm = slf._countEm(String(info.value));
+				var nmEm = slf._countEm(info.name);
+				var valEm = slf._countEm(info.value);
 				return _max(nmEm, valEm) + 1;
 			},
 			paintNode : function(info, level, cbox, node, pnode) {
@@ -115,8 +115,8 @@
 				var cell = slf._paper.twinBox({
 					cx : center.x,
 					cy : center.y,
-					text1 : String(info.name),
-					text2 : String(info.value),
+					text1 : info.name,
+					text2 : info.value,
 					fz : slf._fz,
 					color : color,
 					vertical : vert
@@ -385,6 +385,7 @@
 		},
 		
 		_countEm : function(str) {
+			str = String(str);
 			var halfs = 0, len = str.length, ch;
 			for(var i = 0; i < len; i ++) {
 				ch = str.charAt(i);

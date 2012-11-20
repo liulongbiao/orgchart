@@ -35,8 +35,19 @@ $(function(exports) {
 	$chart.orgchart({
 		width : 960,
 		height : 600,
-		nodeclick : function(evt, info, node) {
-			console.log(info);
+		paintNode : function(info, level, cbox, node, pnode) {
+			var slf = this, ops = slf.options;
+			var center = cbox.center("center");
+			var vert = ops.isVert.call(slf, level, info, node);
+			slf._paper.twinBox({
+				cx : center.x,
+				cy : center.y,
+				text1 : info.name,
+				text2 : info.value,
+				fz : slf._fz,
+				color : "#FF0000",
+				vertical : vert
+			});
 		}
 	});
 	$chart.orgchart("draw", _datas);

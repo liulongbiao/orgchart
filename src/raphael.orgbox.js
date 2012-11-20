@@ -11,7 +11,7 @@
  * @author LiuLongbiao
  * 
  */
-;(function(Raphael, $, undefined) {
+;(function(Raphael, $, String, undefined) {
 
 	var _black = "#000000", _white = "#FFFFFF", _blue = "#0000FF";
 	
@@ -20,6 +20,7 @@
 	}
 
 	function countEm(str) {
+		str = String(str);
 		var halfs = 0, len = str.length, ch;
 		for(var i = 0; i < len; i ++) {
 			ch = str.charAt(i);
@@ -136,7 +137,8 @@
 		var paper = this;
 		var nm_rect, nm_txt, vl_rect, vl_txt;
 		var cx = ops.cx, cy = ops.cy, fz = ops.fz, color = ops.color, lh = ops.lineHeight;
-		var pref_len = Math.max(countEm(ops.text1), countEm(ops.text2)) + 1,
+		var text1 = ops.text1, text2 = ops.text2;
+		var pref_len = Math.max(countEm(text1), countEm(text2)) + 1,
 			rect_h, rect_w;
 		if(ops.vertical) {
 			rect_h = pref_len * fz;
@@ -151,7 +153,7 @@
 			nm_txt = paper.unitext({
 				x : cx - 0.5 * lh * fz,
 				y : cy,
-				text : ops.text1,
+				text : text1,
 				fz : fz,
 				color : _white,
 				vertical : true
@@ -165,7 +167,7 @@
 			vl_txt = paper.unitext({
 				x : cx + 0.5 * lh * fz,
 				y : cy,
-				text : ops.text2,
+				text : text2,
 				fz : fz,
 				color : color,
 				vertical : true
@@ -183,7 +185,7 @@
 			nm_txt = paper.unitext({
 				x : cx,
 				y : cy - 0.5 * lh  * fz,
-				text : ops.text1,
+				text : text1,
 				fz : fz,
 				color : _white,
 				vertical : false
@@ -197,7 +199,7 @@
 			vl_txt = paper.unitext({
 				x : cx,
 				y : cy + 0.5 * lh  * fz,
-				text : ops.text2,
+				text : text2,
 				fz : fz,
 				color : color,
 				vertical : false
@@ -223,7 +225,8 @@
 		var ops = $.extend({}, Raphael.fn.singleBox.defaults, options || {});
 		var paper = this,  _rect, _txt;
 		var cx = ops.cx, cy = ops.cy, fz = ops.fz, color = ops.color, lh = ops.lineHeight;
-		var pref_len = countEm(ops.text) + 1, rect_h, rect_w, vert = ops.vertical;
+		var text = ops.text;
+		var pref_len = countEm(text) + 1, rect_h, rect_w, vert = ops.vertical;
 		if(vert) {
 			rect_w = lh * fz;
 			rect_h = pref_len * fz;
@@ -242,7 +245,7 @@
 		_txt = paper.unitext({
 			x : cx,
 			y : cy,
-			text : ops.text,
+			text : text,
 			fz : fz,
 			color : _white,
 			vertical : vert
@@ -262,4 +265,4 @@
 			vertical : false
 	};
 	
-})(Raphael, jQuery);
+})(Raphael, jQuery, String);
