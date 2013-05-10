@@ -6,8 +6,8 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-	<script src="../js/main/raphael.orgbox.js"></script>
-	<script src="../js/main/jquery.widgets.orgchart.js"></script>
+	<script src="../src/raphael.orgbox.js"></script>
+	<script src="../src/jquery.widgets.orgchart.js"></script>
 	</head>
 	<body>
 		<h2>组织结构图</h2>
@@ -15,6 +15,20 @@
 		</div>
 	<script type="text/javascript">
 $(function(exports) {
+	var _colors = ["#0000FF", "#8A2BE2", "#D2691E", "#DC143C", 
+	               "#006400", "#8B008B", "#008000", "#FF4500", 
+	               '#006699', '#006600', '#663300', '#9C5023', 
+	               '#7A4F20', '#A01D20', '#5B6C30'];
+	
+	function _hashColor(input) {
+		var idx = 0, clen = _colors.length;
+		for(var i = 0, len = input.length;i < len; i ++) {
+			var cd = input.charCodeAt(i);
+			idx = (idx * 31 + cd) % clen;
+		}
+		return _colors[idx];
+	}
+	
 	var _datas = [{"id":1,"name":"xxx能源公司","value":1,"pid":null},
 	              {"id":2,"name":"化工厂","value":2,"pid":1},
 	              {"id":3,"name":"电厂","value":3,"pid":1},
@@ -27,9 +41,10 @@ $(function(exports) {
 	              {"id":26,"name":"222","value":26,"pid":26},
 	              {"id":28,"name":"电厂","value":28,"pid":6},
 	              {"id":29,"name":"电厂产线3","value":29,"pid":28},
-	              {"id":37,"name":"teat1","value":37,"pid":1},
-	              {"id":45,"name":"dfew","value":45,"pid":37},
-	              {"id":49,"name":"dgeg","value":49,"pid":45}];
+	              {"id":37,"name":"水泥厂","value":37,"pid":1},
+	              {"id":45,"name":"一号窑","value":45,"pid":37},
+	              {"id":49,"name":"一号窑水冷器","value":49,"pid":45},
+	              {"id":50,"name":"一号窑发动机","value":50,"pid":45}];
 	
 	var $chart = $("#chart");
 	$chart.orgchart({
@@ -39,13 +54,14 @@ $(function(exports) {
 			var slf = this, ops = slf.options;
 			var center = cbox.center("center");
 			var vert = ops.isVert.call(slf, level, info, node);
+			node._color = (vert && pnode._color) ? pnode._color : _hashColor(info.name);
 			slf._paper.twinBox({
 				cx : center.x,
 				cy : center.y,
 				text1 : info.name,
 				text2 : info.value,
 				fz : slf._fz,
-				color : "#FF0000",
+				color : node._color,
 				vertical : vert
 			});
 		}
